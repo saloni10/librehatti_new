@@ -20,7 +20,6 @@ def index(request):
 
     return render(request,'catalog.html', {'productlist': productlist, 
                'categorylist': categorylist})
-
     pass
 
 
@@ -29,10 +28,13 @@ def add_categories(request):
     if request.method == 'POST' :
         form = addCategory(request.POST)
         if form.is_valid():
-            return HttpResponseRedirec('/')
+            return HttpResponseRedirect('/')
     else:
         form = addCategory()
     return render(request, 'addCategory.html', {
             'form':form,
     })
+
+
+
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
-
+import useraccounts
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -20,7 +21,7 @@ class Product(models.Model):
 
 class Attributes(models.Model):
     name = models.CharField(max_length=200)
-    is_number = models.BooleanField()
+    is_number = models.BooleanField()   
     is_string = models.BooleanField()
     def __unicode__(self):
         return self.name
@@ -43,10 +44,11 @@ class PurchasedItem(models.Model):
     qty = models.IntegerField()
     discount= models.IntegerField()
     item = models.ForeignKey(Product)
+         
     def save(self):
         if not self.id:
             self.price = self.item.price * self.qty
-        super(purchased_item,self).save()
+        super(PurchasedItem,self).save()
 
     def __unicode__(self):
         return '%s' % (self.item) + ' - ' '%s' % (self.purchase_order)
