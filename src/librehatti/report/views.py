@@ -27,16 +27,6 @@ def index(request):
   return render(request, 'index.html',temp)
 
 
-def dates(start_date, end_date):
-	import datetime
-	from django import forms
-	if start_date > datetime.date.today() or end_date > datetime.date.today():
-		raise forms.ValidationError("The date cannot be in the future!")
-	elif end_date < start_date :
-		raise forms.ValidationError("The start_date is greater than end_date!")
-	else:
-		pass
-
 
 def display(request):
     

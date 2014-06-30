@@ -2,6 +2,7 @@ from django import forms
 #from search_choices import CLIENT_FIELD_CHOICES,CLIENT_ORDER_CHOICES, CLIENT_ORDER_TYPES_CHOICES
 #from search_choices import JOB_SEARCH_CHOICES
 from search_choices import *
+import datetime
 
 
 class ClientForm(forms.Form):
@@ -20,7 +21,7 @@ class OrderForm(forms.Form):
 class AddConstraints(forms.Form):
         additional_constraints =  forms.MultipleChoiceField(required=False,
         widget=forms.CheckboxSelectMultiple, choices= CONSTRAINT_CHOICES)
-        start_date = forms.DateField(required=False)
-        end_date = forms.DateField(required=False)
+        start_date = forms.DateField(required=False, initial='2014-01-01')
+        end_date = forms.DateField(required=False, initial= datetime.date.today())
         
 
