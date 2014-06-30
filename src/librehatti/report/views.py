@@ -97,12 +97,22 @@ def display(request):
             found_entries = PurchasedItem.objects.filter(entry_query)
             for entries in found_entries:
                 temp = []
-                if 'debit' in selected_fields_order:
+                if 'debit' and 'date' in selected_fields_order:
+                    for value in search_fields:
+                        obj = PurchasedItem.objects.filter(id=entries.id,purchase_order__is_debit = 1,purchase_order__date_time__range=(start_date,end_date)).values(value)
+                        for temp_result in obj:
+                            temp.append(temp_result)
+                elif 'date' and not 'debit' in selected_fields_order:
+                    for value in search_fields:
+                        obj = PurchasedItem.objects.filter(id=entries.id,purchase_order__date_time__range=(start_date,end_date)).values(value)
+                        for temp_result in obj:
+                            temp.append(temp_result)
+                elif 'debit' and not 'date' in selected_fields_order:
                     for value in search_fields:
                         obj = PurchasedItem.objects.filter(id=entries.id,purchase_order__is_debit = 1).values(value)
                         for temp_result in obj:
-                            temp.append(temp_result)
-                                                         
+                            temp.append(temp_result)  
+                                                                           
                 else:
                     for value in search_fields:
                         obj = PurchasedItem.objects.filter(id=entries.id).values(value)
