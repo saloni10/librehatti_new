@@ -15,7 +15,12 @@ class OrderForm(forms.Form):
         order = forms.MultipleChoiceField(required=False,
         widget=forms.CheckboxSelectMultiple, choices=CLIENT_ORDER_CHOICES)
 
-class OrderType(forms.Form):
-		order_types = forms.MultipleChoiceField(required=False,
-        widget=forms.CheckboxSelectMultiple, choices=CLIENT_ORDER_TYPES_CHOICES)    
+
+        
+class AddConstraints(forms.Form):
+        additional_constraints =  forms.MultipleChoiceField(required=False,
+        widget=forms.CheckboxSelectMultiple, choices= CONSTRAINT_CHOICES)
+        start_date = forms.DateField(required=False)
+        end_date = forms.DateField(required=False)
+        
 

@@ -1,18 +1,23 @@
 CLIENT_FIELD_CHOICES = (
-		('user__username', 'Name'),
-    ('address__city', 'Address'),
-	  ('telephone', 'Phone'),
-	  ('date_joined','Date of Joining'),('company','Company'),
+		('name', 'Name'),
+    ('city', 'Address'),
+	  ('phone', 'Phone'),('company','Company'),
 	  )
 	  
-CLIENT_ORDER_CHOICES=(('item__name','Item'),('item__category','Category'),
-		('qty','Quantity'),
-		('item__price','Unit Price'),('discount','Discount')
-		,('purchase_order__is_debit','Debit'),
+CLIENT_ORDER_CHOICES=(('name','Buyer'),('item','Item'),
+		('quantity','Quantity'),('city', 'Customer City'),
+		('unit price','Unit Price'),('discount','Discount')
+		,('debit','Debit'),('total price','Total Price'),
 		)
 		
 CLIENT_ORDER_TYPES_CHOICES=(
 		('is_debit','Debit'),
 		
+)
+
+CONSTRAINT_CHOICES= (
+    ('date', 'Date'),
+    ('gt','Amount greater than'),
+    ('lt','Amount lesser than'),
 )
 
