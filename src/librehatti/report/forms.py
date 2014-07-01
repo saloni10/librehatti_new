@@ -19,9 +19,9 @@ class OrderForm(forms.Form):
 
         
 class AddConstraints(forms.Form):
-        additional_constraints =  forms.MultipleChoiceField(required=False,
-        widget=forms.CheckboxSelectMultiple, choices= CONSTRAINT_CHOICES)
+       
         start_date = forms.DateField(required=False, initial='2014-01-01')
         end_date = forms.DateField(required=False, initial= datetime.date.today())
-        
-
+        additional_constraints =  forms.MultipleChoiceField(required=False,widget=forms.CheckboxSelectMultiple, choices= CONSTRAINT_CHOICES)
+        amount_greater_than = forms.FloatField(required=False, initial = 0)
+        amount_less_than = forms.FloatField(required=False, initial = 1000000)
