@@ -1,10 +1,12 @@
-from django.shortcuts import *
-from forms import *
+from django.shortcuts import render
+from forms import ClientForm, OrderForm, AddConstraints
 
-"""
-view to display "index.html" i.e. the search interface or form
-"""
+
 def search(request):
+
+    """
+    view to display "index.html" i.e. the search interface or form
+    """
     client_form = ClientForm()
     order_form = OrderForm()
     add_constraints=  AddConstraints()
