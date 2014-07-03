@@ -1,15 +1,16 @@
  # Create your views here.
 from django.http import HttpResponse
-from useraccounts.models import *
-from helper import *
-from forms import *
-from django.shortcuts import *
-from librehatti.catalog.models import *
+from useraccounts.models import Customer
+from helper import get_query
+from django.shortcuts import render
+from librehatti.catalog.models import PurchaseOrder, Product
 
-"""
-searches and displays the results for the query entered according to the checkboxes selected
-"""
-def search_result(request):
+
+def search_result(request):  
+
+    """
+    searches and displays the results for the query entered according to the checkboxes selected
+    """
     title = 'Search'
     results=[]
     result_fields = []
@@ -49,8 +50,7 @@ def search_result(request):
                 temp = []
                 if 'date' in selected_fields_constraints:
                     for value in search_fields:
-                        obj = Customer.objects.filter(id=entries.id,
-                        date_joined__range=(start_date,end_date) ).values(value)
+                        obj = Customer.objects.filter(id=entries.id, date_joined__range=(start_date,end_date) ).values(value)
                         for temp_result in obj:
                             temp.append(temp_result)
                 else:                    
@@ -72,7 +72,7 @@ def search_result(request):
         query_string = ''
         found_entries = None
         if ('search' in request.GET) and request.GET['search'].strip():
-            query_string = request.GET['search']
+            query_string= request.GET['search']
             entry_query = get_query(query_string,search_fields)
             found_entries = PurchasedItem.objects.filter(entry_query)
             for entries in found_entries:
@@ -225,7 +225,7 @@ def search_result(request):
                 
     if 'search' in request.GET:
         title = request.GET['search']
-    return render(request, 'search_result.html', {'results':results,'title': title,'result_fields':result_fields })
+    return render(request, 'search_result.html', {'results':results,'title': title,'result_fields':result_fields, 'a':search_fields,'b':search_value})
 
 
 
